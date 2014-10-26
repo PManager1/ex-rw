@@ -1,14 +1,16 @@
-angular.module('app').controller('mvNavBarLoginCtrl', function ($scope, $http, $location) {
+angular.module('app').controller('mvNavBarLoginCtrl', function ($scope, $http, $location, mvIdentity, mvNotifier) {
 
   $scope.signin = function (username, password) {
     console.log(' -------  -----  signin clicked ');
 
     $http.post('/login', {username:username, password:password}).then(function  (response) {
       if(response.data.success){
-        console.log('logged in!');
+        mvIdentity.currentUser = response.data.user;
+        mvNotifier.notify('You have successfully signed in!'); 
+        console.log(' after notify - You have successfully signed in!'); 
       }
       else{
-        console.log(' failed to login');
+        mvNotifier.notify('Failed to login!');         
       }
     })
 
