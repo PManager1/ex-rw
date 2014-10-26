@@ -1,7 +1,7 @@
 angular.module('app').factory('mvIdentity', function  () {
   return {
     currentUser: undefined, 
-    isAuthenticated: function  () {
+    isAuthenticated: function () {
       return !!this.currentUser; 
     }
   }

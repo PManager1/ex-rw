@@ -32,6 +32,13 @@ footer p{
   margin-left: 10px;
 }
 
-footer.container.text-center p{
-  
+footer.container.text-center p{ 
+}
+
+.toast-top-right{
+  top:65px;
+}
+
+.toast-success{
+  /*background-color: */
 }
