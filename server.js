@@ -1,4 +1,4 @@
-var colors = require('colors'); 
+
 
 var express = require('express');
 var path = require('path');
@@ -10,58 +10,15 @@ var stylus = require('stylus')
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
 var mongoose = require('mongoose'); 
 
-
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-
 var app = express();
+var config = require('./server/config/config.js')[env]; 
 
-
-
-
-
-// view engine setup
-app.set('views', path.join(__dirname, '/server/views'));
-app.set('view engine', 'jade');
-
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', routes);
-app.use('/users', users);
-
-
-
-
-
-mongoose.connect('mongodb://localhost/mvision'); 
-var db = mongoose.connection; 
-
-db.on('error', console.log.bind(console, 'Connection error...'));
-db.once('open', function callback() {
-    console.log('mvision db opened');
-});
-
-
-
-
-app.get('/partials/*', function (req, res) {
-    res.render('../../public/app/' + req.params[0]);
-  });
-
-
-app.get('*', function (req, res) {
-    res.render('index');
-});
- 
-
+require('./server/config/express')(app,config); 
+require('./server/config/mongoose')(config); 
+require('./server/config/routes')(app); 
 
 
 
@@ -102,15 +59,13 @@ app.use(function(err, req, res, next) {
 
 
 
-
-
 var debug = require('debug')('ex-rushnwash');
 
 app.set('port', process.env.PORT || 3000);
 
 console.log ( ' listing on port 3000'); 
 
-var server = app.listen(app.get('port'), function() {
+var server = app.listen(config.port, function() {
   debug('Express server listening on port ' + server.address().port);
 });
 
