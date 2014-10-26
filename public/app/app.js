@@ -2,21 +2,18 @@ angular.module('app', ['ngResource', 'ngRoute']);
 
 angular.module('app').config(function ($routeProvider, $locationProvider) {
 
-  $locationProvider.html5Mode(true);
+  $locationProvider.html5Mode({
+  enabled: true,
+  requireBase: false
+  });
+
   $routeProvider
-    .when('/', { templateUrl: '/partials/main', controller: 'MainCtrl'})
-    // .when('/admin/users', {
-    //   templateUrl: '/partials/admin/user-list',
-    //   controller: 'mvUserListCtrl',
-    //   resolve: routeRoleChecks.admin
-    // })
-    // .when('/signup', {
-    //   templateUrl: '/partials/account/signup',
-    //   controller: 'mvSignupCtrl'
-    // });
+    .when('/', { templateUrl: '/partials/main', controller: 'mainCtrl'})
+   
 });
 
-angular.module('app').controller('MainCtrl', function  ($scope) {
-  $scope.myVar = "Hello Angular"
+angular.module('app').controller('mainCtrl', function  ($scope) {
+  $scope.myVar = "Hello Angular from mainCtrl  variable";
 })
+
 
