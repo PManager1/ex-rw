@@ -1,11 +1,26 @@
 body{
-  border: 1px solid red;
+  /*border: 1px solid red;*/
   padding-top: 61px;
 }
+
+.navbar-header a.navbar-brand{
+  margin-top: -15px;
+  margin-bottom: -20px;
+}
+
+h6 {
+  color: #ccc;
+}
+
+
+
 
 footer{
   padding-left: 15px;
   padding-right: 15px;
+}
+
+footer p{
   border-top: 1px solid #eee;
   padding-top: 1em;
 }
@@ -15,4 +30,8 @@ footer{
 }
 .navbar-form button{
   margin-left: 10px;
+}
+
+footer.container.text-center p{
+  
 }
