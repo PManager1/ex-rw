@@ -9,7 +9,7 @@ angular.module('app').factory('mvAuth', function ($http, mvIdentity, $q) {
         dfd.resolve(true); 
       }
       else{
-        dfd.resolve(true); 
+        dfd.resolve(false); 
       }
     }); 
       return dfd.promise; 
