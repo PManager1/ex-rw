@@ -11,3 +11,7 @@ bower install toastr --save
 bower install angular angular-resource angular-route --save
 
 
+
+db.messages.insert({message: 'Hello Mong'});
+
+
