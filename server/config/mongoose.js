@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-    // encrypt = require('../utilities/encryption');
+    encrypt = require('../utilities/encryption');
 
 module.exports = function (config){
   mongoose.connect(config.db);
@@ -12,18 +12,22 @@ module.exports = function (config){
   var userSchema = mongoose.Schema({
       firstName: String, 
       lastName: String, 
-      username: String
+      username: String, 
+      salt: String, 
+      hashed_pwd: String
   }); 
 
   var User = mongoose.model('User', userSchema);  // create a user model based upon the userSchema
 
-  User.find({}).exec(function  (err, collection) {
-    if( collection.length === 0 ){
-      User.create({firstName:'Joe', lastName: 'Eames', username: 'joe'}); 
-      User.create({firstName:'John', lastName: 'Papa', username: 'john'}); 
-      User.create({firstName:'Dan', lastName: 'Wahlin', username: 'dan'}); 
+  User.find({}).exec(function (err, collection) {
+    if (collection.length === 0) {
+      var salt, hash;
+      salt = encrypt.createSalt();
+      hash = encrypt.hashPwd(salt, 'joe');
+      User.create({firstName:'Joe',lastName: 'Eames', username: 'joe', salt: salt, hashed_pwd: hash, roles: []});
+      salt = encrypt.createSalt();
+      hash = encrypt.hashPwd(salt, 'luis');
+      User.create({firstName:'Luis',lastName: 'Martins', username: 'luis', salt: salt, hashed_pwd: hash, roles: ['admin']});
     }
   })
-
-
 };
