@@ -6,7 +6,7 @@ angular.module('app').controller('mvNavBarLoginCtrl', function ($scope, $http, $
         mvNotifier.notify("You have successfully signed in!"); 
       }
       else{
-        mvNotifier.notify('Failed to login!');  
+        mvNotifier.notify('Please check the username/password!');  
       }
     }); 
   };
